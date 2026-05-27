@@ -23,6 +23,9 @@ Personal portfolio page for **Suyog Shirsat** — a static frontend project buil
 - Responsive design
 - Visually appealing theme
 
+## Live Demo
+🌐 [View Live on GitHub Pages](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-1-Static-Portfolio-Website/task1.html)
+
 ## How to Run
 
 ### WAMP

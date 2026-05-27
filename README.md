@@ -25,8 +25,10 @@ Summer Internship/
 
 ## Tasks
 
-### Task 1 - Static Portfolio Website (`Task-1-Static-Portfolio-Website/task1.html`)
+### Task 1 - Static Portfolio Website
+🌐 [Live Demo](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-1-Static-Portfolio-Website/task1.html)
 Personal portfolio page with hero section, clickable project cards with detail modal, contact form with validation, scroll animations, dark navbar, and back-to-top button.
 
-### Task 2 - Responsive Web Page (`Task-2-Responsive-Web-Page/Task2.html`)
+### Task 2 - Responsive Web Page
+🌐 [Live Demo](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-2-Responsive-Web-Page/Task2.html)
 "ShopVerse" e-commerce landing page with dynamic product grid (22 items across 6 categories), category filter buttons, shopping cart, checkout order form with validation, dark mode toggle, newsletter signup, and scroll animations.

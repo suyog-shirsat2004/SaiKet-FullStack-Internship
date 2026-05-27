@@ -21,11 +21,14 @@
 - **Navbar blur effect** on scroll
 - **Back-to-top button**
 
+## Live Demo
+🌐 [View Live on GitHub Pages](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-2-Responsive-Web-Page/Task2.html)
+
 ## How to Run
 
 ### WAMP
 ```
-http://localhost/Summer%20Internship/Task%202/Task2.html
+http://localhost/Summer%20Internship/Task-2-Responsive-Web-Page/Task2.html
 ```
 
 ### Direct (No Server)
