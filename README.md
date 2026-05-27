@@ -6,24 +6,27 @@ This repository includes all internship tasks and projects completed at SaiKet S
 
 ```
 Summer Internship/
-├── Task 1/                    # Personal Portfolio
-│   ├── task1.html             # Portfolio page (Suyog Shirsat)
-│   ├── styles.css             # Custom styles
-│   ├── script.js              # Contact form validation
-│   └── img/                   # Profile & project images
+├── Task-1-Static-Portfolio-Website/
+│   ├── task1.html
+│   ├── styles.css
+│   ├── script.js
+│   ├── README.md
+│   └── img/
 │       ├── profile img.webp
-│       └── project 1-6.webp
-├── Task 2/                    # E-Commerce Storefront
-│   ├── Task2.html             # ShopVerse landing page
-│   ├── styles.css             # Custom styles with dark mode
-│   └── script.js              # Cart, modal, dark mode, validation
+│       └── project 1.webp - project 6.webp
+├── Task-2-Responsive-Web-Page/
+│   ├── Task2.html
+│   ├── styles.css
+│   ├── script.js
+│   └── README.md
+├── LICENSE
 └── README.md
 ```
 
 ## Tasks
 
-### Task 1 - Portfolio (`Task 1/task1.html`)
-Personal portfolio page with hero section, project grid (6 cards), and contact form with client-side validation.
+### Task 1 - Static Portfolio Website (`Task-1-Static-Portfolio-Website/task1.html`)
+Personal portfolio page with hero section, clickable project cards with detail modal, contact form with validation, scroll animations, dark navbar, and back-to-top button.
 
-### Task 2 - E-Commerce Storefront (`Task 2/Task2.html`)
-"ShopVerse" product showcase with dynamic product grid, shopping cart with badge counter, product detail modal, dark mode toggle, and newsletter signup.
+### Task 2 - Responsive Web Page (`Task-2-Responsive-Web-Page/Task2.html`)
+"ShopVerse" e-commerce landing page with dynamic product grid (22 items across 6 categories), category filter buttons, shopping cart, checkout order form with validation, dark mode toggle, newsletter signup, and scroll animations.
