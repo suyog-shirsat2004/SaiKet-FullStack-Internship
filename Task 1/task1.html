@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero d-flex align-items-center">
+        <div class="container text-center">
+            <img src="img/profile%20img.webp" alt="Profile" class="rounded-circle mb-3 border border-4 border-white shadow" style="width:150px;height:150px;object-fit:cover;">
+            <h1 class="display-4 fw-bold">Suyog Shirsat</h1>
+            <p class="lead text-white-50">Full Stack Developer</p>
+            <p class="col-lg-6 mx-auto text-white-50">I build clean, responsive, and user-friendly web experiences.</p>
+            <a href="#projects" class="btn btn-primary btn-lg me-2">View Projects</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg">Contact Me</a>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-5">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <h2 class="fw-bold">Projects</h2>
+                <p class="text-muted mt-2">Some things I've built</p>
+            </div>
+            <div class="row g-4" id="productGrid">
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="card project-card h-100 border-0 shadow-sm" data-id="1" role="button">
+                        <img src="img/project%201.webp" class="card-img-top" alt="Project 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Alpha</h5>
+                            <p class="card-text text-muted">A full-stack web application built with React and Node.js.</p>
+                            <span class="badge bg-primary me-1">React</span>
+                            <span class="badge bg-secondary">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="card project-card h-100 border-0 shadow-sm" data-id="2" role="button">
+                        <img src="img/project%202.webp" class="card-img-top" alt="Project 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Beta</h5>
+                            <p class="card-text text-muted">E-commerce platform with payment integration and admin dashboard.</p>
+                            <span class="badge bg-success me-1">Python</span>
+                            <span class="badge bg-secondary">Django</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="card project-card h-100 border-0 shadow-sm" data-id="3" role="button">
+                        <img src="img/project%203.webp" class="card-img-top" alt="Project 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Gamma</h5>
+                            <p class="card-text text-muted">Mobile-first weather dashboard with real-time data visualization.</p>
+                            <span class="badge bg-danger me-1">Vue</span>
+                            <span class="badge bg-secondary">D3.js</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="card project-card h-100 border-0 shadow-sm" data-id="4" role="button">
+                        <img src="img/project%204.webp" class="card-img-top" alt="Project 4">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Delta</h5>
+                            <p class="card-text text-muted">Task management tool with drag-and-drop boards.</p>
+                            <span class="badge bg-warning text-dark me-1">Angular</span>
+                            <span class="badge bg-secondary">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="card project-card h-100 border-0 shadow-sm" data-id="5" role="button">
+                        <img src="img/project%205.webp" class="card-img-top" alt="Project 5">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Epsilon</h5>
+                            <p class="card-text text-muted">Machine learning pipeline for sentiment analysis.</p>
+                            <span class="badge bg-info text-dark me-1">ML</span>
+                            <span class="badge bg-secondary">FastAPI</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4 reveal">
+                    <div class="card project-card h-100 border-0 shadow-sm" data-id="6" role="button">
+                        <img src="img/project%206.webp" class="card-img-top" alt="Project 6">
+                        <div class="card-body">
+                            <h5 class="card-title">Project Zeta</h5>
+                            <p class="card-text text-muted">Real-time chat application with WebSocket support.</p>
+                            <span class="badge bg-purple me-1">Socket.io</span>
+                            <span class="badge bg-secondary">Express</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="section-header text-center reveal">
+                <h2 class="fw-bold">Get In Touch</h2>
+                <p class="text-muted mt-2">Have a project in mind? Let's talk.</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 reveal">
+                    <form id="contactForm" novalidate>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                            <div class="invalid-feedback">Please enter your name.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="subject" required>
+                            <div class="invalid-feedback">Please enter a subject.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                            <div class="invalid-feedback">Please enter a message.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Toast -->
+    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+        <div id="formToast" class="toast align-items-center text-bg-success border-0" role="alert">
+            <div class="d-flex">
+                <div class="toast-body"><i class="bi bi-check-circle-fill me-2"></i>Message sent successfully!</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Detail Modal -->
+    <div class="modal fade" id="projectModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Project Name</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <img src="" id="modalImg" class="img-fluid rounded shadow-sm" alt="">
+                        </div>
+                        <div class="col-md-6">
+                            <p id="modalTech" class="mb-3"></p>
+                            <p id="modalDescription" class="text-muted mb-3"></p>
+                            <div class="mb-3">
+                                <small class="text-muted fw-semibold">Key Features</small>
+                                <ul id="modalFeatures" class="list-unstyled mt-2 small"></ul>
+                            </div>
+                            <div class="d-flex gap-4 pt-2 border-top">
+                                <div>
+                                    <small class="text-muted d-block">Duration</small>
+                                    <span class="fw-semibold" id="modalDuration"></span>
+                                </div>
+                                <div>
+                                    <small class="text-muted d-block">Role</small>
+                                    <span class="fw-semibold" id="modalRole"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center text-white-50 reveal">
+        <div class="container">
+            <div class="mb-3">
+                <a href="https://github.com/suyog-shirsat2004" target="_blank" class="text-white-50 me-3"><i class="bi bi-github fs-5"></i></a>
+                <a href="https://www.linkedin.com/in/suyog-shirsat-75a64622a" target="_blank" class="text-white-50 me-3"><i class="bi bi-linkedin fs-5"></i></a>
+                <a href="#" class="text-white-50"><i class="bi bi-twitter-x fs-5"></i></a>
+            </div>
+            <p class="mb-0 small">&copy; 2026 Suyog Shirsat. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
