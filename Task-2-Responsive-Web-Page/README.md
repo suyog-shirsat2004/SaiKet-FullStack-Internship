@@ -24,7 +24,7 @@
 ## Live Demo
 🌐 [View Live on GitHub Pages](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-2-Responsive-Web-Page/Task2.html)
 
-## How to Run
+## How to Run:
 
 ### WAMP
 ```
