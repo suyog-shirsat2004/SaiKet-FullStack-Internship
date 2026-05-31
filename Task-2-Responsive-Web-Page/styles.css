@@ -201,7 +201,7 @@ body.dark #products {
     background-color: #0d1117;
 }
 
-/* Filter buttons */
+/* Filter button */
 #filterBar {
     display: flex;
     flex-wrap: wrap;
