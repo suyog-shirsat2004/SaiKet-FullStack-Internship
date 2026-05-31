@@ -1,0 +1,42 @@
+.app-container {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-header h1 {
+  letter-spacing: -0.5px;
+}
+
+.list-group-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 0.2rem rgba(99, 102, 241, 0.15);
+}
+
+.form-check-input:checked {
+  background-color: #22c55e;
+  border-color: #22c55e;
+}
+
+.btn-primary {
+  background-color: #6366f1;
+  border-color: #6366f1;
+}
+
+.btn-primary:hover {
+  background-color: #4f46e5;
+  border-color: #4f46e5;
+}
+
+.progress-bar {
+  border-radius: 3px;
+}
