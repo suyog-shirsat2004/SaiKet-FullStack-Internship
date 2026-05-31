@@ -21,7 +21,6 @@
 
 ## Live Demo
 🌐 [View Live on GitHub Pages](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-3-Front-End-Framework-Basics/dist/)
-🌐 [View on jsDelivr CDN](https://cdn.jsdelivr.net/gh/suyog-shirsat2004/SaiKet-FullStack-Internship@main/Task-3-Front-End-Framework-Basics/dist/index.html)
 
 ## How to Run
 

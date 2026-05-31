@@ -49,5 +49,5 @@ Personal portfolio page with hero section, clickable project cards with detail m
 "ShopVerse" e-commerce landing page with dynamic product grid (22 items across 6 categories), category filter buttons, shopping cart, checkout order form with validation, dark mode toggle, newsletter signup, and scroll animations.
 
 ### Task 3 - Front-End Framework Basics (React)
-🌐 [GitHub Pages](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-3-Front-End-Framework-Basics/dist/) · [jsDelivr CDN](https://cdn.jsdelivr.net/gh/suyog-shirsat2004/SaiKet-FullStack-Internship@main/Task-3-Front-End-Framework-Basics/dist/index.html)
+🌐 [Live Demo](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-3-Front-End-Framework-Basics/dist/)
 "Task Flow" — a full-featured to-do list app built with React and Bootstrap 5.3.8. Add, edit, delete, duplicate, and filter tasks with priority levels and due dates. Data persists in localStorage. Features animated dark gradient background, progress bar, and inline editing.
