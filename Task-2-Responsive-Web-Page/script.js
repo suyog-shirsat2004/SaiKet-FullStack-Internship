@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-    // ----- Scroll Reveal -----
+    // ----- Scroll Reveal ----
     var revealEls = document.querySelectorAll('.reveal');
     var revealObserver = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
