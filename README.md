@@ -73,22 +73,7 @@ Personal portfolio page with hero section, clickable project cards with detail m
 
 ### Task 4 - Build a Basic REST API
 🌐 [Live Demo](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-4-Build-a-Basic-REST-API/public/) (dashboard UI preview)
-📂 [Source Code](https://github.com/suyog-shirsat2004/SaiKet-FullStack-Internship/tree/main/Task-4-Build-a-Basic-REST-API)
-📮 [Postman Collection](https://github.com/suyog-shirsat2004/SaiKet-FullStack-Internship/blob/main/Task-4-Build-a-Basic-REST-API/Task-4-REST-API.postman_collection.json)
 
 A RESTful CRUD API built with **Node.js**, **Express 5**, and JSON file storage.
 
-**API Endpoints:**
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/users` | List users (search, sort, filter, paginate) |
-| `GET` | `/api/users/:id` | Get user by ID |
-| `POST` | `/api/users` | Create user (`name`, `email`, `age`) |
-| `PUT` | `/api/users/:id` | Full update |
-| `PATCH` | `/api/users/:id` | Partial update |
-| `DELETE` | `/api/users/:id` | Delete user |
-| `DELETE` | `/api/users?confirm=true` | Delete all users |
-
 **Features:** Input validation, duplicate email detection, search by name/email, sorting (name/age/date), age range filtering, pagination, custom error handling, dark-mode Bootstrap dashboard UI.
-
-⚠️ *The dashboard is a static preview. Run `cd Task-4-Build-a-Basic-REST-API && npm start` for full API functionality at `http://localhost:4000`.*
