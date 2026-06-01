@@ -54,5 +54,4 @@ Personal portfolio page with hero section, clickable project cards with detail m
 
 ### Task 4 - Build a Basic REST API
 🌐 [Live Demo](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-4-Build-a-Basic-REST-API/public/)
-🌐 [GitHub Repository](https://github.com/suyog-shirsat2004/SaiKet-FullStack-Internship/tree/main/Task-4-Build-a-Basic-REST-API)
 A RESTful API built with Node.js, Express 5, and JSON file storage. Supports full CRUD operations for a User entity with search, sort, filter, pagination, input validation, and a dark-mode Bootstrap dashboard UI. Test with the included Postman collection. ⚠️ Requires `npm start` for full API functionality.
