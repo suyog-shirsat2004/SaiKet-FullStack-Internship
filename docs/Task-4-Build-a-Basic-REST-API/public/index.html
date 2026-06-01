@@ -346,35 +346,30 @@
       document.getElementById(id).addEventListener('change', () => { currentPage = 1; loadUsers() })
     })
 
-    ;(async function init() {
-      const badge = document.getElementById('status-badge')
-      const rows = document.getElementById('usersBody')
-      for (const url of ['/api/users', 'http://localhost:4000/api/users']) {
-        try {
-          const r = await fetch(url, { method: 'HEAD' })
-          if (r.ok) { API = url; badge.textContent = '● Online'; badge.className = 'badge bg-success me-1'; return loadUsers() }
-        } catch {}
-      }
-      badge.textContent = '● Offline'
-      badge.className = 'badge bg-danger me-1'
-      rows.innerHTML = '<tr><td colspan="6" class="text-center py-4"><div class="mb-3">⚡ API server offline</div><div class="mb-3 text-secondary small">Double-click <code>start-api.bat</code> in repo root or run <code>npm start</code> in Task-4 folder</div><button class="btn btn-outline-info btn-sm" onclick="pollServer()">🔄 Waiting for server... click to check now</button></td></tr>'
-      pollServer()
-    })()
-
-    let pollTimer
-    function pollServer() {
-      clearTimeout(pollTimer)
-      const badge = document.getElementById('status-badge')
-      const rows = document.getElementById('usersBody')
-      rows.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-secondary"><div class="spinner-border spinner-border-sm me-2"></div>Connecting to localhost:4000...</td></tr>'
-      fetch('http://localhost:4000/api/users', { method: 'HEAD' })
-        .then(r => { if (r.ok) { clearTimeout(pollTimer); window.location.href = 'http://localhost:4000' } })
-        .catch(() => {
-          badge.textContent = '● Offline'
-          rows.innerHTML = '<tr><td colspan="6" class="text-center py-4"><div class="mb-3">⚡ Still offline</div><div class="mb-3 text-secondary small">Double-click <code>start-api.bat</code> in repo root</div><button class="btn btn-outline-info btn-sm" onclick="pollServer()">🔄 Retry</button></td></tr>'
-          pollTimer = setTimeout(pollServer, 3000)
-        })
+    function checkServer(cb) {
+      const img = new Image()
+      img.onload = () => cb(true)
+      img.onerror = () => cb(false)
+      img.src = 'http://localhost:4000/api/users?' + Date.now()
     }
+
+    ;(function init() {
+      const badge = document.getElementById('status-badge')
+      const rows = document.getElementById('usersBody')
+      const onGitHub = window.location.hostname.includes('github.io')
+      if (!onGitHub) {
+        API = '/api/users'
+        badge.textContent = '● Online'
+        return loadUsers()
+      }
+      checkServer(online => {
+        if (online) { window.location.href = 'http://localhost:4000'; return }
+        badge.textContent = '● Offline'
+        badge.className = 'badge bg-danger me-1'
+        rows.innerHTML = '<tr><td colspan="6" class="text-center py-4"><div class="mb-2">⚡ API server offline</div><div class="mb-3 text-secondary small">Double-click <code>start-api.bat</code> in repo root</div><div class="small text-secondary"><span class="spinner-border spinner-border-sm me-1"></span>Auto-retrying every 3s...</div></td></tr>'
+        setInterval(() => checkServer(online => { if (online) window.location.href = 'http://localhost:4000' }), 3000)
+      })
+    })()
   </script>
 </body>
 </html>
