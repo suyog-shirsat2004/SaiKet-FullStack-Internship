@@ -1,0 +1,16 @@
+{
+  "name": "task-4-rest-api",
+  "version": "1.0.0",
+  "description": "Task 4 - Basic REST API with Node.js, Express & CRUD for User entity",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0",
+    "uuid": "^11.1.0"
+  }
+}
