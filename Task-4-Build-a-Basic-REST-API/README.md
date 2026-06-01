@@ -4,7 +4,7 @@ A fully functional RESTful API built with **Node.js**, **Express 5**, and **JSON
 
 ## 🔗 Links
 
-- 📄 **API Dashboard (Live Preview):** https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-4-Build-a-Basic-REST-API/public/
+- 📄 **Dashboard UI (Live Preview):** https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-4-Build-a-Basic-REST-API/public/
 - ⚡ **API Server:** http://localhost:4000 (requires `npm start`)
 - 📮 **Postman Collection:** `Task-4-REST-API.postman_collection.json`
 

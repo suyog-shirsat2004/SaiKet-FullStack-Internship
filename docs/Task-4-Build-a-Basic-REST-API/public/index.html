@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task 4 — REST API Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root { --bs-border-color: #2d2d3a; }
+    body { background: #0d0d1a; }
+    .card { border-color: var(--bs-border-color); background: #1a1a2e; }
+    .card-header { background: #16162a; border-bottom-color: var(--bs-border-color); }
+    .table { --bs-table-bg: transparent; --bs-table-color: #e0e0e0; }
+    .table-hover tbody tr:hover { background: rgba(99,102,241,0.08); }
+    #toast-container { position: fixed; top: 1rem; right: 1rem; z-index: 9999; }
+    .cursor-pointer { cursor: pointer; }
+    .highlight-row { animation: highlightFade 2s ease; }
+    @keyframes highlightFade { 0% { background: rgba(99,102,241,0.2); } 100% { background: transparent; } }
+    .user-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.85rem; }
+    .badge-age { min-width: 32px; }
+    .stats-card { border-left: 3px solid; }
+  </style>
+</head>
+<body>
+
+  <div id="toast-container"></div>
+
+  <div class="container py-4">
+    <header class="d-flex flex-wrap align-items-center justify-content-between mb-4">
+      <div>
+        <h1 class="h3 fw-bold mb-1">
+          <i class="bi bi-server text-primary me-2"></i>User API Dashboard
+        </h1>
+        <p class="text-secondary small mb-0">
+          Base URL: <code class="text-info">http://localhost:4000/api/users</code>
+        </p>
+      </div>
+      <div>
+        <span class="badge bg-success me-1" id="status-badge">● Online</span>
+        <button class="btn btn-outline-light btn-sm" id="refreshBtn" title="Refresh">
+          <i class="bi bi-arrow-clockwise"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="row g-3 mb-4" id="statsRow"></div>
+
+    <div class="card mb-4">
+      <div class="card-header d-flex flex-wrap align-items-center gap-2 py-3">
+        <h2 class="h6 fw-semibold mb-0 me-auto">
+          <i class="bi bi-funnel me-1"></i>Filters &amp; Search
+        </h2>
+        <div class="d-flex flex-wrap gap-2">
+          <input type="text" class="form-control form-control-sm" id="searchInput" placeholder="Search name or email..." style="width:200px">
+          <select class="form-select form-select-sm" id="sortBySelect" style="width:auto">
+            <option value="createdAt">Newest</option>
+            <option value="name">Name</option>
+            <option value="age">Age</option>
+          </select>
+          <select class="form-select form-select-sm" id="sortOrderSelect" style="width:auto">
+            <option value="desc">Desc</option>
+            <option value="asc">Asc</option>
+          </select>
+          <input type="number" class="form-control form-control-sm" id="minAgeInput" placeholder="Min age" style="width:80px">
+          <input type="number" class="form-control form-control-sm" id="maxAgeInput" placeholder="Max age" style="width:80px">
+        </div>
+      </div>
+    </div>
+
+    <div class="card mb-4">
+      <div class="card-header d-flex align-items-center justify-content-between py-3">
+        <h2 class="h6 fw-semibold mb-0">
+          <i class="bi bi-people me-1"></i>Users
+          <span class="badge bg-secondary ms-1" id="userCount">0</span>
+        </h2>
+        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#userModal">
+          <i class="bi bi-plus-lg"></i> Add User
+        </button>
+      </div>
+      <div class="card-body p-0">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0" id="usersTable">
+            <thead class="table-dark">
+              <tr>
+                <th style="width:40px">#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th style="width:80px">Age</th>
+                <th style="width:170px">Created</th>
+                <th style="width:140px">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersBody">
+              <tr id="loadingRow"><td colspan="6" class="text-center py-4 text-secondary">Loading...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-between align-items-center py-2" id="paginationFooter">
+        <small class="text-secondary" id="paginationInfo"></small>
+        <nav>
+          <ul class="pagination pagination-sm mb-0" id="paginationUl"></ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="userModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTitle"><i class="bi bi-person-plus me-1"></i>Add User</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <form id="userForm" novalidate>
+          <div class="modal-body">
+            <input type="hidden" id="userId">
+            <div class="mb-3">
+              <label class="form-label small fw-medium">Full Name</label>
+              <input type="text" class="form-control" id="nameInput" placeholder="John Doe" required minlength="2">
+              <div class="invalid-feedback">Name must be at least 2 characters.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-medium">Email Address</label>
+              <input type="email" class="form-control" id="emailInput" placeholder="john@example.com" required>
+              <div class="invalid-feedback">Please enter a valid email.</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label small fw-medium">Age</label>
+              <input type="number" class="form-control" id="ageInput" placeholder="25" min="1" max="150" required>
+              <div class="invalid-feedback">Age must be 1–150.</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-sm" id="submitBtn">
+              <i class="bi bi-check-lg"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const API = '/api/users'
+    let currentPage = 1
+    let totalPages = 1
+    let totalUsers = 0
+
+    const toast = (msg, type = 'success') => {
+      const c = document.getElementById('toast-container')
+      const t = document.createElement('div')
+      t.className = `toast align-items-center text-bg-${type} border-0 show`
+      t.role = 'alert'
+      t.innerHTML = `<div class="d-flex"><div class="toast-body">${msg}</div><button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button></div>`
+      c.appendChild(t)
+      setTimeout(() => { t.remove() }, 3000)
+    }
+
+    const getParams = () => {
+      const p = new URLSearchParams()
+      p.set('page', currentPage)
+      p.set('limit', '8')
+      const s = document.getElementById('searchInput').value.trim()
+      if (s) p.set('search', s)
+      const sb = document.getElementById('sortBySelect').value
+      if (sb !== 'createdAt') p.set('sortBy', sb)
+      const so = document.getElementById('sortOrderSelect').value
+      if (so !== 'desc') p.set('sortOrder', so)
+      const min = document.getElementById('minAgeInput').value
+      if (min) p.set('minAge', min)
+      const max = document.getElementById('maxAgeInput').value
+      if (max) p.set('maxAge', max)
+      return p
+    }
+
+    const loadUsers = async () => {
+      const params = getParams()
+      const rows = document.getElementById('usersBody')
+      rows.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-secondary"><div class="spinner-border spinner-border-sm me-2"></div>Loading...</td></tr>'
+
+      try {
+        const r = await fetch(`${API}?${params}`)
+        if (!r.ok) throw new Error((await r.json()).error || 'Request failed')
+        const j = await r.json()
+        renderUsers(j)
+      } catch (e) {
+        rows.innerHTML = `<tr><td colspan="6" class="text-center py-4 text-danger">${e.message}</td></tr>`
+      }
+    }
+
+    const renderUsers = (j) => {
+      const rows = document.getElementById('usersBody')
+      currentPage = j.page
+      totalPages = j.totalPages
+      totalUsers = j.total
+
+      if (!j.data.length) {
+        rows.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-secondary">No users found. Add one!</td></tr>'
+      } else {
+        rows.innerHTML = j.data.map((u, i) => {
+          const initials = u.name.split(' ').map(s => s[0]).join('').toUpperCase().slice(0, 2)
+          const colors = ['#6366f1','#22c55e','#f59e0b','#ef4444','#8b5cf6','#06b6d4','#f97316','#ec4899']
+          const color = colors[i % colors.length]
+          const created = new Date(u.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+          return `<tr data-id="${u.id}">
+            <td class="text-secondary text-center">${(currentPage - 1) * 8 + i + 1}</td>
+            <td>
+              <div class="d-flex align-items-center gap-2">
+                <div class="user-avatar" style="background:${color}">${initials}</div>
+                <span class="fw-medium">${esc(u.name)}</span>
+              </div>
+            </td>
+            <td class="text-secondary small">${esc(u.email)}</td>
+            <td><span class="badge bg-secondary badge-age">${u.age}</span></td>
+            <td class="text-secondary small">${created}</td>
+            <td>
+              <div class="btn-group btn-group-sm">
+                <button class="btn btn-outline-info" onclick="editUser('${u.id}')" title="Edit"><i class="bi bi-pencil"></i></button>
+                <button class="btn btn-outline-danger" onclick="deleteUser('${u.id}')" title="Delete"><i class="bi bi-trash"></i></button>
+              </div>
+            </td>
+          </tr>`
+        }).join('')
+      }
+
+      document.getElementById('userCount').textContent = totalUsers
+      renderPagination()
+      renderStats()
+    }
+
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+
+    const renderPagination = () => {
+      const info = document.getElementById('paginationInfo')
+      info.textContent = `Page ${currentPage} of ${totalPages} (${totalUsers} total)`
+
+      const ul = document.getElementById('paginationUl')
+      ul.innerHTML = ''
+      const add = (label, page, disabled, active) => {
+        const li = document.createElement('li')
+        li.className = `page-item ${disabled ? 'disabled' : ''} ${active ? 'active' : ''}`
+        li.innerHTML = `<button class="page-link" ${disabled ? '' : `data-page="${page}"`}>${label}</button>`
+        ul.appendChild(li)
+      }
+      add('«', currentPage - 1, currentPage <= 1)
+      for (let i = Math.max(1, currentPage - 2); i <= Math.min(totalPages, currentPage + 2); i++) {
+        add(i, i, false, i === currentPage)
+      }
+      add('»', currentPage + 1, currentPage >= totalPages)
+
+      ul.querySelectorAll('[data-page]').forEach(b => {
+        b.addEventListener('click', () => { currentPage = Number(b.dataset.page); loadUsers() })
+      })
+    }
+
+    const renderStats = async () => {
+      try {
+        const r = await fetch(`${API}?limit=1`)
+        const j = await r.json()
+        const row = document.getElementById('statsRow')
+        const avg = j.total ? (await fetch(`${API}?limit=${j.total}`).then(r2 => r2.json())).data.reduce((s,u) => s + u.age, 0) / j.total : 0
+        const oldest = j.total ? (await fetch(`${API}?sortBy=age&sortOrder=desc&limit=1`).then(r2 => r2.json())).data[0] : null
+        row.innerHTML = `
+          <div class="col-md-3 col-6"><div class="card stats-card border-success h-100"><div class="card-body p-3"><small class="text-secondary">Total Users</small><h4 class="mb-0 fw-bold text-success">${j.total}</h4></div></div></div>
+          <div class="col-md-3 col-6"><div class="card stats-card border-info h-100"><div class="card-body p-3"><small class="text-secondary">Average Age</small><h4 class="mb-0 fw-bold text-info">${avg.toFixed(1)}</h4></div></div></div>
+          <div class="col-md-3 col-6"><div class="card stats-card border-warning h-100"><div class="card-body p-3"><small class="text-secondary">Oldest User</small><h4 class="mb-0 fw-bold text-warning" style="font-size:1rem">${oldest ? esc(oldest.name) : '—'}</h4></div></div></div>
+          <div class="col-md-3 col-6"><div class="card stats-card border-primary h-100"><div class="card-body p-3"><small class="text-secondary">Pages</small><h4 class="mb-0 fw-bold text-primary">${j.totalPages || 0}</h4></div></div></div>
+        `
+      } catch {}
+    }
+
+    const deleteUser = async (id) => {
+      if (!confirm('Delete this user?')) return
+      try {
+        const r = await fetch(`${API}/${id}`, { method: 'DELETE' })
+        if (!r.ok) throw new Error((await r.json()).error)
+        toast('User deleted', 'danger')
+        if (currentPage > 1 && document.querySelectorAll('#usersBody tr').length <= 1) currentPage--
+        loadUsers()
+      } catch (e) { toast(e.message, 'danger') }
+    }
+
+    const editUser = async (id) => {
+      try {
+        const r = await fetch(`${API}/${id}`)
+        const j = await r.json()
+        const u = j.data
+        document.getElementById('modalTitle').innerHTML = '<i class="bi bi-pencil me-1"></i>Edit User'
+        document.getElementById('userId').value = u.id
+        document.getElementById('nameInput').value = u.name
+        document.getElementById('emailInput').value = u.email
+        document.getElementById('ageInput').value = u.age
+        document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-lg"></i> Update'
+        new bootstrap.Modal(document.getElementById('userModal')).show()
+      } catch (e) { toast('Failed to load user', 'danger') }
+    }
+
+    document.getElementById('userForm').addEventListener('submit', async (e) => {
+      e.preventDefault()
+      const form = e.target
+      if (!form.checkValidity()) { form.classList.add('was-validated'); return }
+      form.classList.remove('was-validated')
+
+      const id = document.getElementById('userId').value
+      const body = {
+        name: document.getElementById('nameInput').value.trim(),
+        email: document.getElementById('emailInput').value.trim(),
+        age: Number(document.getElementById('ageInput').value),
+      }
+
+      try {
+        const r = await fetch(id ? `${API}/${id}` : API, {
+          method: id ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body),
+        })
+        const j = await r.json()
+        if (!r.ok) throw new Error(j.error)
+        bootstrap.Modal.getInstance(document.getElementById('userModal')).hide()
+        toast(id ? 'User updated' : 'User created')
+        currentPage = 1
+        loadUsers()
+      } catch (err) { toast(err.message, 'danger') }
+    })
+
+    document.getElementById('userModal').addEventListener('hidden.bs.modal', () => {
+      document.getElementById('userId').value = ''
+      document.getElementById('userForm').reset()
+      document.getElementById('userForm').classList.remove('was-validated')
+      document.getElementById('modalTitle').innerHTML = '<i class="bi bi-person-plus me-1"></i>Add User'
+      document.getElementById('submitBtn').innerHTML = '<i class="bi bi-check-lg"></i> Save'
+    })
+
+    document.getElementById('refreshBtn').addEventListener('click', loadUsers)
+
+    ;['searchInput','sortBySelect','sortOrderSelect','minAgeInput','maxAgeInput'].forEach(id => {
+      document.getElementById(id).addEventListener('input', () => { currentPage = 1; loadUsers() })
+      document.getElementById(id).addEventListener('change', () => { currentPage = 1; loadUsers() })
+    })
+
+    loadUsers()
+  </script>
+</body>
+</html>
