@@ -34,6 +34,25 @@ Summer Internship/
 │   ├── package.json
 │   ├── vite.config.js
 │   └── README.md
+├── Task-4-Build-a-Basic-REST-API/
+│   ├── data/
+│   │   └── users.json
+│   ├── middleware/
+│   │   ├── errorHandler.js
+│   │   └── validate.js
+│   ├── public/
+│   │   └── index.html
+│   ├── routes/
+│   │   └── users.js
+│   ├── server.js
+│   ├── package.json
+│   ├── Task-4-REST-API.postman_collection.json
+│   └── README.md
+├── docs/                            # GitHub Pages source
+│   ├── index.html
+│   └── Task-4-Build-a-Basic-REST-API/
+│       └── public/
+│           └── index.html
 ├── LICENSE
 └── README.md
 ```
@@ -53,5 +72,23 @@ Personal portfolio page with hero section, clickable project cards with detail m
 "Task Flow" — a full-featured to-do list app built with React and Bootstrap 5.3.8. Add, edit, delete, duplicate, and filter tasks with priority levels and due dates. Data persists in localStorage. Features animated dark gradient background, progress bar, and inline editing.
 
 ### Task 4 - Build a Basic REST API
-🌐 [Live Demo](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-4-Build-a-Basic-REST-API/public/)
-A RESTful API built with Node.js, Express 5, and JSON file storage. Supports full CRUD operations for a User entity with search, sort, filter, pagination, input validation, and a dark-mode Bootstrap dashboard UI. Test with the included Postman collection. ⚠️ Requires `npm start` for full API functionality.
+🌐 [Live Demo](https://suyog-shirsat2004.github.io/SaiKet-FullStack-Internship/Task-4-Build-a-Basic-REST-API/public/) (dashboard UI preview)
+📂 [Source Code](https://github.com/suyog-shirsat2004/SaiKet-FullStack-Internship/tree/main/Task-4-Build-a-Basic-REST-API)
+📮 [Postman Collection](https://github.com/suyog-shirsat2004/SaiKet-FullStack-Internship/blob/main/Task-4-Build-a-Basic-REST-API/Task-4-REST-API.postman_collection.json)
+
+A RESTful CRUD API built with **Node.js**, **Express 5**, and JSON file storage.
+
+**API Endpoints:**
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/users` | List users (search, sort, filter, paginate) |
+| `GET` | `/api/users/:id` | Get user by ID |
+| `POST` | `/api/users` | Create user (`name`, `email`, `age`) |
+| `PUT` | `/api/users/:id` | Full update |
+| `PATCH` | `/api/users/:id` | Partial update |
+| `DELETE` | `/api/users/:id` | Delete user |
+| `DELETE` | `/api/users?confirm=true` | Delete all users |
+
+**Features:** Input validation, duplicate email detection, search by name/email, sorting (name/age/date), age range filtering, pagination, custom error handling, dark-mode Bootstrap dashboard UI.
+
+⚠️ *The dashboard is a static preview. Run `cd Task-4-Build-a-Basic-REST-API && npm start` for full API functionality at `http://localhost:4000`.*
