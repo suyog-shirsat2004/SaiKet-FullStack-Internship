@@ -347,18 +347,19 @@
     })
 
     ;(async () => {
+      let found = false
       for (const url of ['/api/users', 'http://localhost:4000/api/users']) {
         try {
           const r = await fetch(url, { method: 'HEAD' })
-          if (r.ok) { API = url; break }
+          if (r.ok) { API = url; found = true; break }
         } catch {}
       }
       const badge = document.getElementById('status-badge')
-      if (API.startsWith('http')) {
+      if (found && API.startsWith('http')) {
         badge.textContent = '● Remote'
         badge.className = 'badge bg-warning me-1'
         loadUsers()
-      } else if (API === '/api/users') {
+      } else if (found) {
         badge.textContent = '● Online'
         badge.className = 'badge bg-success me-1'
         loadUsers()
@@ -366,7 +367,7 @@
         badge.textContent = '● Offline'
         badge.className = 'badge bg-danger me-1'
         document.getElementById('usersBody').innerHTML =
-          '<tr><td colspan="6" class="text-center py-4 text-secondary">⚡ API server offline — run <code>npm start</code> locally, then <a href="http://localhost:4000" class="text-info">open localhost:4000</a></td></tr>'
+          '<tr><td colspan="6" class="text-center py-4 text-secondary">⚡ API server offline — run <code>npm start</code> localhost:4000</td></tr>'
       }
     })()
   </script>
