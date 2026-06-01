@@ -9,6 +9,8 @@ A fully functional RESTful API built with **Node.js**, **Express 5**, and **JSON
 - 📮 **Postman Collection:** `Task-4-REST-API.postman_collection.json`
 
 > **Note:** The dashboard UI is a static preview. For full CRUD functionality, run the server locally with `npm start`.
+>
+> 🚀 **One-click launcher:** Double-click `start-api.bat` in the repo root to start the server and open `http://localhost:4000` automatically.
 
 ---
 
