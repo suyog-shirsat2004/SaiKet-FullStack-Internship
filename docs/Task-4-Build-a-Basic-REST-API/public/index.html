@@ -117,17 +117,17 @@
           <div class="modal-body">
             <input type="hidden" id="userId">
             <div class="mb-3">
-              <label class="form-label small fw-medium">Full Name</label>
+              <label class="form-label small fw-medium" for="nameInput">Full Name</label>
               <input type="text" class="form-control" id="nameInput" placeholder="John Doe" required minlength="2">
               <div class="invalid-feedback">Name must be at least 2 characters.</div>
             </div>
             <div class="mb-3">
-              <label class="form-label small fw-medium">Email Address</label>
+              <label class="form-label small fw-medium" for="emailInput">Email Address</label>
               <input type="email" class="form-control" id="emailInput" placeholder="john@example.com" required>
               <div class="invalid-feedback">Please enter a valid email.</div>
             </div>
             <div class="mb-3">
-              <label class="form-label small fw-medium">Age</label>
+              <label class="form-label small fw-medium" for="ageInput">Age</label>
               <input type="number" class="form-control" id="ageInput" placeholder="25" min="1" max="150" required>
               <div class="invalid-feedback">Age must be 1–150.</div>
             </div>
@@ -354,10 +354,20 @@
         } catch {}
       }
       const badge = document.getElementById('status-badge')
-      const isRemote = API.startsWith('http')
-      badge.textContent = isRemote ? '● Remote' : '● Online'
-      badge.className = isRemote ? 'badge bg-warning me-1' : 'badge bg-success me-1'
-      loadUsers()
+      if (API.startsWith('http')) {
+        badge.textContent = '● Remote'
+        badge.className = 'badge bg-warning me-1'
+        loadUsers()
+      } else if (API === '/api/users') {
+        badge.textContent = '● Online'
+        badge.className = 'badge bg-success me-1'
+        loadUsers()
+      } else {
+        badge.textContent = '● Offline'
+        badge.className = 'badge bg-danger me-1'
+        document.getElementById('usersBody').innerHTML =
+          '<tr><td colspan="6" class="text-center py-4 text-secondary">⚡ API server offline — run <code>npm start</code> locally, then <a href="http://localhost:4000" class="text-info">open localhost:4000</a></td></tr>'
+      }
     })()
   </script>
 </body>
