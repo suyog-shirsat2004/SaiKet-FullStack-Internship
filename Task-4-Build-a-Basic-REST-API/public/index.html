@@ -150,10 +150,12 @@
     let totalPages = 1
     let totalUsers = 0
 
+    const REMOTE_API = 'https://task-4-rest-api.onrender.com/api/users'
+
     ;(async () => {
-      for (const url of ['/api/users', 'http://localhost:4000/api/users']) {
+      for (const url of ['/api/users', REMOTE_API, 'http://localhost:4000/api/users']) {
         try {
-          const r = await fetch(url, { method: 'HEAD' })
+          const r = await fetch(url, { method: 'HEAD', mode: 'cors' })
           if (r.ok) { API = url; break }
         } catch {}
       }
